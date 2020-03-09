@@ -1,0 +1,8 @@
+Sử dụng formidable
+links: https://www.w3schools.com/nodejs/nodejs_uploadfiles.asp
+https://trungquandev.com/upload-files-trong-node-js/
+https://toidicode.com/upload-file-trong-nodejs-261.html
+fs.rename để đổi folder cho file: 
+https://nodejs.org/docs/latest/api/fs.html#fs_fs_rename_oldpath_newpath_callback
+
+

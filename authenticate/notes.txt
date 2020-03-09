@@ -1,0 +1,18 @@
+{ 'iQOFH4J1JStwAaoSTYF7Fu4aJF-WE8Hy':
+    {   
+        cookie:{ 
+            originalMaxAge: null, expires: null, httpOnly: true, path: '/' 
+        } 
+    },
+    lGlW568FTObEGmUL6BZL6qVCTBw4AjJw:
+    { 
+        cookie:{ 
+            originalMaxAge: null, expires: null, httpOnly: true, path: '/' 
+        } 
+    } 
+}
+First time, Client sends a request to Server. The server has not found any Session ID from this request and responses a normal webpage and includes SET-COOKIE: SessionID=xyz
+
+From now, every request from client will include Session ID = xyz (by Cookies).
+
+If you clear Cookies, certainly the Session ID is gone.

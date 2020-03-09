@@ -1,0 +1,21 @@
+túm váy lại:
+
+module.export (es5) = export (es6)
+require (es5) = import(es6)
+
+es5:
+khi mà x = require(file a) thì x = giá trị của module.exports trong file a
+
+Trong file a:
+
+nếu module.exports = function thì x là function
+nếu module.exports = class thì x là class
+nếu module.exports = obj thì x là obj
+nếu module.exports = string thì x là string
+...
+
+tuy nhiên một phải chỉ có một module.exports nên là muốn export nhiều cái một lúc thì phải để module.exports là một obj
+
+es6: 
+
+cũng thế. nhưng mà export nhiều lần được trong 1 file. lúc import nó tự obj hoá cho mình rồi 
