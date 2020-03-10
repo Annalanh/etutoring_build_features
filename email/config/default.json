@@ -1,8 +1,8 @@
 {
     "Admin":{
         "emailService":{
-            "apiKey": "d320c6e3ab271a742e505154870c7088-ee13fadb-7f950539",
-            "domain": "sandbox745a8ddf1c39453fa8ed5369e2f148ed.mailgun.org"
+            "apiKey": "",
+            "domain": ""
         } 
     }
 }
