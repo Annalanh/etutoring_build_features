@@ -1,0 +1,3 @@
+Sử dụng nodemailer và mailgun làm sandbox
+dùng handlebars để tạo notification template
+https://coderrocketfuel.com/article/send-emails-with-node.js-using-mailgun-and-nodemailer
