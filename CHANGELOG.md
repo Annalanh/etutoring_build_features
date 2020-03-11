@@ -21,3 +21,6 @@
 ## Thaogum
 1. Làm authenticate (done)
 2. Đang làm chat
+
+## TuanAnh
+1. Làm Send email
