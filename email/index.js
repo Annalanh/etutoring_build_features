@@ -5,9 +5,11 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const mg = require('nodemailer-mailgun-transport');
 const app = express();
-const config = require('config');
 const fs = require('fs');
 const handlebars = require('handlebars');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 //view engine setup
 app.engine('handlebars', exphbs());
@@ -25,28 +27,32 @@ app.get('/', (req, res) => {
 });
 
 app.post('/send', (req, res) => {
-    const emailConfig = config.get('Admin.emailService');
     const auth = {
         auth: {
-            api_key: emailConfig.get('apiKey'),
-            domain: emailConfig.get('domain'),
+            api_key: process.env['API_KEY'],
+            domain: process.env['DOMAIN'],
         }
     }
 
-    const nodemailerMailgun = nodemailer.createTransport(mg(auth));
+    const smtpTransport = nodemailer.createTransport(mg(auth));
+
     const emailTemplateSource = fs.readFileSync(path.join(__dirname, "views/templates/notification.handlebars"), "utf8");
+
     const template = handlebars.compile(emailTemplateSource);
+
     const htmlToSend = template({
         student: req.body.student,
         tutor: req.body.tutor,
-    })
+    });
+
     const mailOptions = {
         from: "asdfgh6296@gmail.com",
         to: "ptuananh196@gmail.com",
         subject: 'notification',
         html: htmlToSend
-    }
-    nodemailerMailgun.sendMail(mailOptions, (err, response) => {
+    };
+
+    smtpTransport.sendMail(mailOptions, (err, response) => {
         if (err){
             console.log(err);
             res.render('test', {msg: 'smt went wrong'});
@@ -56,6 +62,7 @@ app.post('/send', (req, res) => {
         }
     })
 })
+
 
 app.listen(3000, () => console.log("server run at 3000"))
 
