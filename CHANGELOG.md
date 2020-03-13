@@ -21,3 +21,10 @@
 ## Thaogum
 1. Làm authenticate (done)
 2. Đang làm chat
+
+========================
+# Date: 13/3/2020
+
+## Thaogum
+1. Xong chat 1 vs 1
+2. Dang làm group chat

@@ -3,32 +3,17 @@ let userList = [
     {
         id: 1,
         username: 'thao',
-        rooms: [],
+        chat: {private: [2,3], group: []},
     },
     {
         id: 2,
         username: 'banhang',
-        rooms: [],
+        chat: {private: [1], group: []},
     },
     {
         id: 3,
         username: 'khanh',
-        rooms: [],
-    },
-    {
-        id: 4,
-        username: 'hoa',
-        rooms: [],
-    },
-    {
-        id: 5,
-        username: 'trang',
-        rooms: [],
-    },
-    {
-        id: 6,
-        username: 'my',
-        rooms: [],
+        chat: {private: [1], group: []},
     }
 ]
 document.getElementById("login-form").addEventListener('submit', (e) => {

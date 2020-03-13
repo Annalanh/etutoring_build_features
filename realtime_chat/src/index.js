@@ -10,74 +10,45 @@ const {onlineUsers, addUser, removeUser, getUser, addNewRoomOnline} = require('.
 const { users, getUserById } = require('./users')
 app.use(express.static(publicDirectoryPath))
 
-let emptyRoom = 0;
+let emptyGroupId = 0;
 io.on('connection', (socket) => {
-    socket.on('joinOnlineList', ({id, username, rooms}) => {
-        addUser({
+    let currentUser = {}
+    socket.on('joinOnlineList', ({id, username, chat}) => {
+        currentUser = {
             id, 
             username,
-            rooms,
+            chat,
             socketid: socket.id
-        })
+        }
+        addUser(currentUser)
     })
 
     socket.on('sendMessage', (msg, callback) => {
-        io.to(msg.room).emit('message', { message: msg.message, room: msg.room })
-    })
+        console.log(onlineUsers)
+        let partnerId = msg.partnerid
+        let message = msg.message
 
-    socket.on('joinRoom', ({id, room, partnername, partnerid }) => {
-        socket.join(room)
-
-        socket.broadcast.to(room).emit('online', {status: true})
-        let partner = onlineUsers.find(onlineUser => onlineUser.id == partnerid)
+        let partner = getUser(partnerId)
         if(partner){
-            socket.emit('onlinePartner', {status: true})
+            console.log('gui cho partner dang online')
+            let partnerSocketId = partner.socketid
+            io.to(`${partnerSocketId}`).emit('message', { message, partnerid: currentUser.id })
         }
-    })
-
-    socket.on("createNewRoom", ({id, partnerid}, callback) =>{
-        //lấy thông tin của mình
-            let currentUser = getUserById(id)
-        //tìm partner đó đã có room nào với mình chưa
-            let newPartner = getUserById(partnerid)
-            let roomWithCurrentUser = newPartner.rooms.find(room => room.partnerid == id)
-            let onlinePartner = getUser(partnerid)
-
-            if(roomWithCurrentUser){
-                //join room 
-                socket.join(roomWithCurrentUser.roomname)
-                //check xem partner có online không
-                // if(onlinePartner) socket.emit("onlinePartner", {status: true})
-                //thêm chatbox cho partner mới và thêm vào db của mình room mới
-                callback(roomWithCurrentUser.roomname)
-                //thêm vào useronline của mình room mới
-                addNewRoomOnline({partnername: newPartner.username, id: id, partnerid: newPartner.id, roomname: roomWithCurrentUser.roomname})
-            }else{
-                console.log('hello')
-                //nếu chưa có thì join mình và partner vào #emptyRoom
-                let newRoom = `room${emptyRoom}`
-                socket.join(newRoom)
-                callback(newRoom)
-                io.emit('newChatRequest', { id: partnerid, roomname: newRoom, partnername: currentUser.username, partnerid: id })   
-                //thêm vào db của mình và partner room mới, thêm vào useronline của mình(và partner nếu partner online) room mới
-                emptyRoom+=1;
-            }
-            if(onlinePartner) socket.emit("onlinePartner", {status: true})
-
-    })
-    socket.on('acceptChatRequest', (roomname, callback) =>{
-        socket.join(roomname)
-        callback()
     })
     socket.on('disconnect', () => {
-        const user = removeUser(socket.id)
-        if (user) {
-            const rooms = user.rooms
-            rooms.forEach( room => {
-                io.to(room.roomname).emit('online', {status: false})
-            });
-        }
+        removeUser(socket.id)
     })
+    // socket.on('createNewGroupChat', ({groupname, members}) => {
+    //     socket.join(emptyGroupId)
+    //     socket.emit('joinNewGroupChat', {groupname, groupid: emptyGroupId})
+    //     members.forEach(membername => {
+    //         let member = onlineUsers.find(user => user.username == membername)
+    //         if(member){
+    //             socket.broadcast.to(`${member.socketid}`).emit('joinNewGroupChat', {groupname, groupid: emptyGroupId})
+    //         }
+    //     });
+    //     emptyGroupId+=1
+    // })
 })
 
 

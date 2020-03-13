@@ -11,7 +11,7 @@ function removeUser(id){
     }
 }
 function getUser(id){
-    return onlineUsers.find(onlineUser => onlineUser.id === id)
+    return onlineUsers.find(onlineUser => onlineUser.id == id)
 }
 function addNewRoomOnline({roomname, id, partnerid, partnername}){
     const index = onlineUsers.findIndex((onlineUser) => onlineUser.id === id)

@@ -10,6 +10,15 @@
     <input type="checkbox" id="manage-chatbox-container">Open/Hide
     <div id = "container">
         <div id = "chatbox-container">
+            <div>New Group</div>
+            <form id="new-group">
+                <div>Group name</div>
+                <input type="text" id = "new-group-name">
+                <div>Group member</div>
+                <input type="text" id = "new-group-member">
+                <button type="submit"></button>
+            </form>
+            <div>New Private Chat</div>
             <form id="new-chat">
                 <input type="text" name="newpartner" id="new-partner" placeholder="Search">
             </form>
@@ -20,7 +29,7 @@
             <div id='close-chat-room'>X</div>
             <div id ="room-sender"></div>
             <form id = "message-form">
-                <input type="text" name ="message" placeholder="Message" required autocomplete="off">
+                <input type="text" name ="message" id="partner-id" placeholder="Message" required autocomplete="off">
                 <button>Send</button>
             </form>
         </div>        
