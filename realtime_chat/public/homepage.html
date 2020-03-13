@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+    <link rel="stylesheet" href="./css/homepage.css">
+</head>
+<body>
+    <input type="checkbox" id="manage-chatbox-container">Open/Hide
+    <div id = "container">
+        <div id = "chatbox-container">
+            <form id="new-chat">
+                <input type="text" name="newpartner" id="new-partner" placeholder="Search">
+            </form>
+            <span>Online:</span><span id="online-number">0</span>
+        </div>
+
+        <div id = "chat-room">
+            <div id='close-chat-room'>X</div>
+            <div id ="room-sender"></div>
+            <form id = "message-form">
+                <input type="text" name ="message" placeholder="Message" required autocomplete="off">
+                <button>Send</button>
+            </form>
+        </div>        
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+    <script src = "/socket.io/socket.io.js"></script>
+    <script src="./js/homepage.js"></script>
+</body>
+</html>

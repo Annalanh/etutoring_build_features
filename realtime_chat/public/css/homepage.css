@@ -1,0 +1,42 @@
+#container{
+    display: flex;
+}
+#chatbox-container{
+    width: 400px;
+    height: 600px;
+    background-color: cornflowerblue;
+    overflow: scroll;
+    padding: 40px;
+    display: none;
+    margin-right: 20px;
+}
+.chatbox{
+    width: 400px;
+    height: 50px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+.chatbox-sender{
+    font-weight: bold;
+}
+.chatbox:hover{
+    cursor: pointer;
+}
+#chat-room{
+    width: 400px;
+    height: 300px;
+    background-color: cornflowerblue;
+    overflow: scroll;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    display: none
+}
+#close-chat-room{
+    position: absolute;
+    right: 10px;
+    top: 10px
+}
+#close-chat-room:hover{
+    cursor: pointer;
+}
